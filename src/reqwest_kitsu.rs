@@ -13,8 +13,6 @@ use async_trait::async_trait;
 pub use reqwest::Client as KitsuClient;
 use reqwest::{RequestBuilder, StatusCode, Url};
 use serde::de::DeserializeOwned;
-use serde_json;
-use std::io::Read;
 
 /// Trait which defines the methods necessary to interact with the service.
 ///

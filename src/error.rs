@@ -1,6 +1,5 @@
 #[cfg(feature = "reqwest")]
 use serde_json::Error as JsonError;
-use std::error::Error as StdError;
 use std::fmt::{Display, Formatter, Result as FmtResult};
 use std::result::Result as StdResult;
 
@@ -81,21 +80,3 @@ impl Display for Error {
     }
 }
 
-impl StdError for Error {
-    fn description(&self) -> &str {
-        match *self {
-            #[cfg(feature = "reqwest")]
-            Error::Json(ref inner) => inner.description(),
-            #[cfg(feature = "reqwest")]
-            Error::Reqwest(ref inner) => inner.description(),
-            #[cfg(feature = "reqwest")]
-            Error::ReqwestBad(_) => "Request bad",
-            #[cfg(feature = "reqwest")]
-            Error::ReqwestInvalid(_) => "Request invalid",
-            #[cfg(feature = "reqwest")]
-            Error::ReqwestParse(ref inner) => inner.description(),
-            #[cfg(feature = "reqwest")]
-            Error::ReqwestUnauthorized(_) => "Request auth bad",
-        }
-    }
-}
