@@ -124,6 +124,9 @@ pub use error::{Error, Result};
 pub use bridge::hyper::KitsuRequester as KitsuHyperRequester;
 #[cfg(feature = "reqwest")]
 pub use bridge::reqwest::KitsuRequester as KitsuReqwestRequester;
+#[cfg(feature = "reqwest")]
+pub use reqwest::Client as KitsuClient;
+
 
 /// Kitsu API Url
 pub const API_URL: &'static str = "https://kitsu.io/api/edge";

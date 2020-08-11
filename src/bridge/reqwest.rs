@@ -7,7 +7,8 @@
 //! [`KitsuRequester`]: trait.KitsuRequester.html
 
 use std::io::Read;
-use reqwest::{Client as ReqwestClient, RequestBuilder, StatusCode, Url};
+pub use reqwest::Client as KitsuClient;
+use reqwest::{RequestBuilder, StatusCode, Url};
 use serde::de::DeserializeOwned;
 use serde_json;
 use crate::builder::Search;
@@ -353,7 +354,7 @@ pub trait KitsuRequester {
 }
 
 #[async_trait]
-impl KitsuRequester for ReqwestClient {
+impl KitsuRequester for KitsuClient {
     async fn get_anime(&self, id: u64) -> Result<Response<Anime>> {
         let uri = Url::parse(&format!("{}/anime/{}", API_URL, id.to_string()))?;
 
