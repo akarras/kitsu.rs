@@ -389,6 +389,12 @@ pub struct MangaAttributes {
     /// [`MangaType::Novel`]: enum.MangaType.html#variant.Novel
     #[serde(rename = "subtype")]
     pub kind: MangaType,
+    /// The status fo the manga
+    ///
+    /// # Examples
+    ///
+    /// `Current`, `Finished`
+    pub status: Status,
     /// The rank based on the popularityof the manga.
     ///
     /// # Examples
