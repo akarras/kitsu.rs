@@ -100,9 +100,7 @@ impl StdError for Error {
             #[cfg(feature = "reqwest")]
             Error::ReqwestParse(ref inner) => inner.description(),
             #[cfg(feature = "reqwest")]
-            Error::ReqwestUnauthorized(_) => "Request auth bad",
-            #[cfg(feature = "hyper")]
-            Error::Uri(ref inner) => inner.description(),
+            Error::ReqwestUnauthorized(_) => "Request auth bad"
         }
     }
 }

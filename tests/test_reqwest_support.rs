@@ -3,7 +3,7 @@
 extern crate kitsu_async;
 extern crate reqwest;
 
-use kitsu_async::KitsuReqwestRequester;
+use kitsu_async::reqwest_kitsu::KitsuRequester;
 use reqwest::Client;
 
 #[ignore]

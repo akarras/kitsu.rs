@@ -110,22 +110,19 @@ extern crate serde_derive;
 #[cfg(feature = "serde_derive")]
 extern crate serde_json;
 
-pub mod bridge;
 pub mod builder;
-
+#[cfg(feature = "reqwest")]
+pub mod reqwest_kitsu;
 #[cfg(feature = "serde_derive")]
 pub mod model;
 
 mod error;
 
+
 pub use error::{Error, Result};
 
 #[cfg(feature = "hyper")]
-pub use bridge::hyper::KitsuRequester as KitsuHyperRequester;
-#[cfg(feature = "reqwest")]
-pub use bridge::reqwest::KitsuRequester as KitsuReqwestRequester;
-#[cfg(feature = "reqwest")]
-pub use reqwest::Client as KitsuClient;
+pub use bridge::hyper::KitsuRequester as KitsuRequester;
 
 
 /// Kitsu API Url

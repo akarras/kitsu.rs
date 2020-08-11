@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CargoProjects">
+    <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="88b8360e-80fc-48dd-98e0-01a1b4ed8c69" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/bridge/hyper.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bridge/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bridge/reqwest.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/reqwest_kitsu.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/error.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/error.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_reqwest_support.rs" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_reqwest_support.rs" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="8rneucef" />
+  </component>
+  <component name="ProjectId" id="1fveJE3GkpH1dhsnK7Q00h0GLHY" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="org.rust.cargo.project.model.PROJECT_DISCOVERY" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Code\kitsu.rs\src" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="cargo test" />
+      <command value="cargo doc" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Cargo Command.test">
+    <configuration name="Test test_reqwest_support" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+      <option name="channel" value="DEFAULT" />
+      <option name="command" value="test --package kitsu_io --test test_reqwest_support &quot;&quot;" />
+      <option name="allFeatures" value="false" />
+      <option name="emulateTerminal" value="false" />
+      <option name="backtrace" value="SHORT" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="build" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+      <option name="channel" value="DEFAULT" />
+      <option name="command" value="build" />
+      <option name="allFeatures" value="false" />
+      <option name="emulateTerminal" value="false" />
+      <option name="backtrace" value="SHORT" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="doc" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+      <option name="channel" value="DEFAULT" />
+      <option name="command" value="doc" />
+      <option name="allFeatures" value="false" />
+      <option name="emulateTerminal" value="false" />
+      <option name="backtrace" value="SHORT" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="test" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+      <option name="channel" value="DEFAULT" />
+      <option name="command" value="test" />
+      <option name="allFeatures" value="false" />
+      <option name="emulateTerminal" value="false" />
+      <option name="backtrace" value="SHORT" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Cargo Command.build" />
+      <item itemvalue="Cargo Command.test" />
+      <item itemvalue="Cargo Command.Test test_reqwest_support" />
+      <item itemvalue="Cargo Command.doc" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Cargo Command.test" />
+        <item itemvalue="Cargo Command.doc" />
+        <item itemvalue="Cargo Command.build" />
+        <item itemvalue="Cargo Command.Test test_reqwest_support" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="RustProjectSettings">
+    <option name="toolchainHomeDirectory" value="$USER_HOME$/.cargo/bin" />
+    <option name="version" value="2" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="88b8360e-80fc-48dd-98e0-01a1b4ed8c69" name="Default Changelist" comment="" />
+      <created>1597102919761</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1597102919761</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="734" y="354" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1597116953933">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="734" y="354" key="#com.intellij.execution.impl.EditConfigurationsDialog/335.-1080.1920.1040/-1920.335.1920.1040/2560.351.1920.1040/0.0.2560.1400@0.0.2560.1400" timestamp="1597116953933" />
+    <state x="907" y="267" key="CommitChangelistDialog2" timestamp="1597119966765">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="907" y="267" key="CommitChangelistDialog2/335.-1080.1920.1040/-1920.335.1920.1040/2560.351.1920.1040/0.0.2560.1400@0.0.2560.1400" timestamp="1597119966765" />
+    <state x="1060" y="454" key="FileChooserDialogImpl" timestamp="1597102952209">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1060" y="454" key="FileChooserDialogImpl/0.0.2560.1400/335.-1080.1920.1040/-1920.335.1920.1040/2560.351.1920.1040@0.0.2560.1400" timestamp="1597102952209" />
+    <state width="2517" height="401" key="GridCell.Tab.0.bottom" timestamp="1597121943304">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="401" key="GridCell.Tab.0.bottom/335.-1080.1920.1040/-1920.335.1920.1040/2560.351.1920.1040/0.0.2560.1400@0.0.2560.1400" timestamp="1597121943304" />
+    <state width="2517" height="401" key="GridCell.Tab.0.center" timestamp="1597121943304">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="401" key="GridCell.Tab.0.center/335.-1080.1920.1040/-1920.335.1920.1040/2560.351.1920.1040/0.0.2560.1400@0.0.2560.1400" timestamp="1597121943304" />
+    <state width="2517" height="401" key="GridCell.Tab.0.left" timestamp="1597121943304">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="401" key="GridCell.Tab.0.left/335.-1080.1920.1040/-1920.335.1920.1040/2560.351.1920.1040/0.0.2560.1400@0.0.2560.1400" timestamp="1597121943304" />
+    <state width="2517" height="401" key="GridCell.Tab.0.right" timestamp="1597121943304">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="401" key="GridCell.Tab.0.right/335.-1080.1920.1040/-1920.335.1920.1040/2560.351.1920.1040/0.0.2560.1400@0.0.2560.1400" timestamp="1597121943304" />
+    <state x="987" y="433" width="585" height="592" key="find.popup" timestamp="1597120016636">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="987" y="433" width="585" height="592" key="find.popup/335.-1080.1920.1040/-1920.335.1920.1040/2560.351.1920.1040/0.0.2560.1400@0.0.2560.1400" timestamp="1597120016636" />
+    <state x="936" y="330" width="672" height="677" key="run.anything.popup" timestamp="1597116960544">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="936" y="330" width="672" height="677" key="run.anything.popup/0.0.2560.1400/335.-1080.1920.1040/-1920.335.1920.1040/2560.351.1920.1040@0.0.2560.1400" timestamp="1597102956438" />
+    <state x="936" y="330" width="672" height="677" key="run.anything.popup/335.-1080.1920.1040/-1920.335.1920.1040/2560.351.1920.1040/0.0.2560.1400@0.0.2560.1400" timestamp="1597116960544" />
+    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup" timestamp="1597111248256">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup/335.-1080.1920.1040/-1920.335.1920.1040/2560.351.1920.1040/0.0.2560.1400@0.0.2560.1400" timestamp="1597111248256" />
+  </component>
+</project>
