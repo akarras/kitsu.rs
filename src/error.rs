@@ -4,14 +4,16 @@ use std::error::Error as StdError;
 use std::fmt::{Display, Formatter, Result as FmtResult};
 use std::result::Result as StdResult;
 
+
 #[cfg(feature = "hyper")]
 use hyper::error::UriError;
 #[cfg(feature = "reqwest")]
 use reqwest::{
     Error as ReqwestError,
     Response as ReqwestResponse,
-    UrlError as ReqwestUrlError,
 };
+use url::ParseError as ReqwestUrlError;
+
 
 /// A result type to compose a successful value and the library's [`Error`]
 /// type.
@@ -80,7 +82,7 @@ impl From<UriError> for Error {
 
 impl Display for Error {
     fn fmt(&self, f: &mut Formatter) -> FmtResult {
-        f.write_str(self.description())
+        f.write_str(&self.to_string())
     }
 }
 

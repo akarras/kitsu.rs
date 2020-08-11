@@ -2,7 +2,7 @@
 
 use serde_json;
 use std::collections::HashMap;
-use ::Result;
+use crate::Result;
 
 /// Information about an anime.
 #[derive(Clone, Debug, Deserialize)]
@@ -804,7 +804,7 @@ impl AgeRating {
     /// # Examples
     ///
     /// ```rust
-    /// use kitsu_io::model::AgeRating;
+    /// use kitsu_async::model::AgeRating;
     ///
     /// assert_eq!(AgeRating::PG.name().unwrap(), "PG");
     /// ```
@@ -867,7 +867,7 @@ impl AnimeType {
     /// # Examples
     ///
     /// ```rust
-    /// use kitsu_io::model::AnimeType;
+    /// use kitsu_async::model::AnimeType;
     ///
     /// assert_eq!(AnimeType::Movie.name().unwrap(), "movie");
     /// assert_eq!(AnimeType::TV.name().unwrap(), "TV");
@@ -896,10 +896,15 @@ pub enum MangaType {
     Manga,
     /// Indicator that the manga is a manhua.
     Manhua,
+    /// Indicator that the manga is a manhwa.
+    Manhwa,
     /// Indicator that the manga is a novel.
     Novel,
+    /// Indicator that the manga is a oel.
+    Oel,
     /// Indicator that the manga is a oneshot.
     Oneshot,
+
 }
 
 impl MangaType {
@@ -908,7 +913,7 @@ impl MangaType {
     /// # Examples
     ///
     /// ```rust
-    /// use kitsu_io::model::MangaType;
+    /// use kitsu_async::model::MangaType;
     ///
     /// assert_eq!(MangaType::Novel.name().unwrap(), "novel");
     /// ```
@@ -948,7 +953,7 @@ impl Type {
     /// # Examples
     ///
     /// ```rust
-    /// use kitsu_io::model::Type;
+    /// use kitsu_async::model::Type;
     ///
     /// assert_eq!(Type::Anime.name().unwrap(), "anime");
     /// ```
@@ -979,7 +984,7 @@ impl WaifuOrHusbando {
     /// # Examples
     ///
     /// ```rust
-    /// use kitsu_io::model::WaifuOrHusbando;
+    /// use kitsu_async::model::WaifuOrHusbando;
     ///
     /// assert_eq!(WaifuOrHusbando::Husbando.name().unwrap(), "Husbando");
     /// ```

@@ -1,7 +1,7 @@
-extern crate kitsu_io;
+extern crate kitsu_async;
 extern crate reqwest;
 
-use kitsu_io::KitsuReqwestRequester;
+use kitsu_async::KitsuReqwestRequester;
 use reqwest::Client;
 use std::io::{self, Write};
 

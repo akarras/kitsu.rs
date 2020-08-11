@@ -6,6 +6,6 @@ authors = ["my name <my@email.address>"]
 [dependencies]
 reqwest = "0.8.0"
 
-[dependencies.kitsu_io]
+[dependencies.kitsu_async]
 features = ["reqwest-support"]
 path = "../../"

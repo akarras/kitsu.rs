@@ -9,7 +9,7 @@ hyper = "~0.11"
 hyper-tls = "~0.1"
 tokio-core = "0.1.10"
 
-[dependencies.kitsu_io]
+[dependencies.kitsu_async]
 default-features = false
 features = ["hyper-support"]
 path = "../../"

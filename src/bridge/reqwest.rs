@@ -10,9 +10,10 @@ use std::io::Read;
 use reqwest::{Client as ReqwestClient, RequestBuilder, StatusCode, Url};
 use serde::de::DeserializeOwned;
 use serde_json;
-use ::builder::Search;
-use ::{API_URL, Error, Result};
-use ::model::{Anime, Manga, Response, User};
+use crate::builder::Search;
+use crate::{API_URL, Error, Result};
+use crate::model::{Anime, Manga, Response, User};
+use async_trait::async_trait;
 
 /// Trait which defines the methods necessary to interact with the service.
 ///
@@ -22,10 +23,11 @@ use ::model::{Anime, Manga, Response, User};
 /// trait:
 ///
 /// ```rust,no_run
-/// use kitsu_io::KitsuReqwestRequester;
+/// use kitsu_async::KitsuReqwestRequester;
 /// ```
 ///
 /// At this point, the methods will be on your Reqwest Client.
+#[async_trait]
 pub trait KitsuRequester {
     /// Gets an anime using its id.
     ///
@@ -34,20 +36,21 @@ pub trait KitsuRequester {
     ///
     ///
     /// ```rust,no_run
-    /// extern crate kitsu_io;
+    /// extern crate kitsu_async;
     /// extern crate reqwest;
     ///
-    /// use kitsu_io::KitsuReqwestRequester;
+    /// use kitsu_async::KitsuReqwestRequester;
     /// use reqwest::Client;
     ///
-    /// fn main() {
+    /// #[tokio::main]
+    /// async fn main() {
     ///     // Create the reqwest Client.
     ///     let client = Client::new();
     ///
     ///     let anime_id = 1;
     ///
     ///     // Get the anime.
-    ///     let anime = client.get_anime(anime_id)
+    ///     let anime = client.get_anime(anime_id).await
     ///         .expect("Error getting anime");
     ///
     ///     // Do something with anime
@@ -77,7 +80,7 @@ pub trait KitsuRequester {
     /// [`Error::ReqwestInvalid`]: ../enum.Error.html#variant.ReqwestInvalid
     /// [`Error::ReqwestParse`]: ../enum.Error.html#variant.ReqwestParse
     /// [`Error::ReqwestUnauthorized`]: ../enum.Error.html#variant.ReqwestUnauthorized
-    fn get_anime(&self, id: u64) -> Result<Response<Anime>>;
+    async fn get_anime(&self, id: u64) -> Result<Response<Anime>>;
 
     /// Gets a manga using its id.
     ///
@@ -86,20 +89,21 @@ pub trait KitsuRequester {
     ///
     ///
     /// ```rust,no_run
-    /// extern crate kitsu_io;
+    /// extern crate kitsu_async;
     /// extern crate reqwest;
     ///
-    /// use kitsu_io::KitsuReqwestRequester;
+    /// use kitsu_async::KitsuReqwestRequester;
     /// use reqwest::Client;
     ///
-    /// fn main() {
+    /// #[tokio::main]
+    /// async fn main() {
     ///     // Create the reqwest Client.
     ///     let client = Client::new();
     ///
     ///     let manga_id = 1;
     ///
     ///     // Get the manga.
-    ///     let manga = client.get_anime(manga_id)
+    ///     let manga = client.get_anime(manga_id).await
     ///         .expect("Error getting manga");
     ///
     ///     // Do something with manga
@@ -129,7 +133,7 @@ pub trait KitsuRequester {
     /// [`Error::ReqwestInvalid`]: ../enum.Error.html#variant.ReqwestInvalid
     /// [`Error::ReqwestParse`]: ../enum.Error.html#variant.ReqwestParse
     /// [`Error::ReqwestUnauthorized`]: ../enum.Error.html#variant.ReqwestUnauthorized
-    fn get_manga(&self, id: u64) -> Result<Response<Manga>>;
+    async fn get_manga(&self, id: u64) -> Result<Response<Manga>>;
 
     /// Gets a user using their id.
     ///
@@ -138,20 +142,21 @@ pub trait KitsuRequester {
     ///
     ///
     /// ```rust,no_run
-    /// extern crate kitsu_io;
+    /// extern crate kitsu_async;
     /// extern crate reqwest;
     ///
-    /// use kitsu_io::KitsuReqwestRequester;
+    /// use kitsu_async::KitsuReqwestRequester;
     /// use reqwest::Client;
     ///
-    /// fn main() {
+    /// #[tokio::main]
+    /// async fn main() {
     ///     // Create the reqwest Client.
     ///     let client = Client::new();
     ///
     ///     let user_id = 1;
     ///
     ///     // Get the user.
-    ///     let user = client.get_anime(user_id)
+    ///     let user = client.get_anime(user_id).await
     ///         .expect("Error getting user");
     ///
     ///     // Do something with user
@@ -181,7 +186,7 @@ pub trait KitsuRequester {
     /// [`Error::ReqwestInvalid`]: ../enum.Error.html#variant.ReqwestInvalid
     /// [`Error::ReqwestParse`]: ../enum.Error.html#variant.ReqwestParse
     /// [`Error::ReqwestUnauthorized`]: ../enum.Error.html#variant.ReqwestUnauthorized
-    fn get_user(&self, id: u64) -> Result<Response<User>>;
+    async fn get_user(&self, id: u64) -> Result<Response<User>>;
 
     /// Gets an anime using its id.
     ///
@@ -190,10 +195,10 @@ pub trait KitsuRequester {
     ///
     ///
     /// ```rust,no_run
-    /// extern crate kitsu_io;
+    /// extern crate kitsu_async;
     /// extern crate reqwest;
     ///
-    /// use kitsu_io::KitsuReqwestRequester;
+    /// use kitsu_async::KitsuReqwestRequester;
     /// use reqwest::Client;
     ///
     /// fn main() {
@@ -204,6 +209,7 @@ pub trait KitsuRequester {
     ///
     ///     // Search for the anime.
     ///     let anime = client.search_anime(|f| f.filter("text", anime_name))
+    ///         .await
     ///         .expect("Error searching for anime");
     ///
     ///     // Do something with anime
@@ -233,8 +239,8 @@ pub trait KitsuRequester {
     /// [`Error::ReqwestInvalid`]: ../enum.Error.html#variant.ReqwestInvalid
     /// [`Error::ReqwestParse`]: ../enum.Error.html#variant.ReqwestParse
     /// [`Error::ReqwestUnauthorized`]: ../enum.Error.html#variant.ReqwestUnauthorized
-    fn search_anime<F: FnOnce(Search) -> Search>(&self, f: F) ->
-        Result<Response<Vec<Anime>>>;
+    async fn search_anime<F>(&self, f: F) -> Result<Response<Vec<Anime>>>
+        where F: FnOnce(Search) -> Search + Send;
 
     /// Gets an anime using its id.
     ///
@@ -243,10 +249,10 @@ pub trait KitsuRequester {
     ///
     ///
     /// ```rust,no_run
-    /// extern crate kitsu_io;
+    /// extern crate kitsu_async;
     /// extern crate reqwest;
     ///
-    /// use kitsu_io::KitsuReqwestRequester;
+    /// use kitsu_async::KitsuReqwestRequester;
     /// use reqwest::Client;
     ///
     /// fn main() {
@@ -257,6 +263,7 @@ pub trait KitsuRequester {
     ///
     ///     // Search for the manga.
     ///     let manga = client.search_manga(|f| f.filter("text", manga_name))
+    ///         .await
     ///         .expect("Error getting manga");
     ///
     ///     // Do something with manga
@@ -286,8 +293,8 @@ pub trait KitsuRequester {
     /// [`Error::ReqwestInvalid`]: ../enum.Error.html#variant.ReqwestInvalid
     /// [`Error::ReqwestParse`]: ../enum.Error.html#variant.ReqwestParse
     /// [`Error::ReqwestUnauthorized`]: ../enum.Error.html#variant.ReqwestUnauthorized
-    fn search_manga<F: FnOnce(Search) -> Search>(&self, f: F) ->
-        Result<Response<Vec<Manga>>>;
+    async fn search_manga<F: FnOnce(Search) -> Search>(&self, f: F) -> Result<Response<Vec<Manga>>>
+        where F: FnOnce(Search) -> Search + Send;
 
     /// Gets an anime using its id.
     ///
@@ -296,10 +303,10 @@ pub trait KitsuRequester {
     ///
     ///
     /// ```rust,no_run
-    /// extern crate kitsu_io;
+    /// extern crate kitsu_async;
     /// extern crate reqwest;
     ///
-    /// use kitsu_io::KitsuReqwestRequester;
+    /// use kitsu_async::KitsuReqwestRequester;
     /// use reqwest::Client;
     ///
     /// fn main() {
@@ -310,6 +317,7 @@ pub trait KitsuRequester {
     ///
     ///     // Search for the user.
     ///     let user = client.search_users(|f| f.filter("name", user_name))
+    ///         .await
     ///         .expect("Error searching for user");
     ///
     ///     // Do something with users
@@ -339,72 +347,70 @@ pub trait KitsuRequester {
     /// [`Error::ReqwestInvalid`]: ../enum.Error.html#variant.ReqwestInvalid
     /// [`Error::ReqwestParse`]: ../enum.Error.html#variant.ReqwestParse
     /// [`Error::ReqwestUnauthorized`]: ../enum.Error.html#variant.ReqwestUnauthorized
-    fn search_users<F: FnOnce(Search) -> Search>(&self, f: F) ->
-        Result<Response<Vec<User>>>;
+    async fn search_users<F>(&self, f: F) -> Result<Response<Vec<User>>>
+        where F: FnOnce(Search) -> Search + Send;
+
 }
 
+#[async_trait]
 impl KitsuRequester for ReqwestClient {
-    fn get_anime(&self, id: u64) -> Result<Response<Anime>> {
+    async fn get_anime(&self, id: u64) -> Result<Response<Anime>> {
         let uri = Url::parse(&format!("{}/anime/{}", API_URL, id.to_string()))?;
 
-        handle_request::<Response<Anime>>(&mut self.get(uri))
+        handle_request::<Response<Anime>>(self.get(uri)).await
     }
 
-    fn get_manga(&self, id: u64) -> Result<Response<Manga>> {
+    async fn get_manga(&self, id: u64) -> Result<Response<Manga>> {
         let uri = Url::parse(&format!("{}/manga/{}", API_URL, id.to_string()))?;
 
-        handle_request::<Response<Manga>>(&mut self.get(uri))
+        handle_request::<Response<Manga>>(self.get(uri)).await
     }
 
-    fn get_user(&self, id: u64) -> Result<Response<User>> {
+    async fn get_user(&self, id: u64) -> Result<Response<User>> {
         let uri = Url::parse(&format!("{}/users/{}", API_URL, id.to_string()))?;
 
-        handle_request::<Response<User>>(&mut self.get(uri))
+        handle_request::<Response<User>>(self.get(uri)).await
     }
 
-    fn search_anime<F: FnOnce(Search) -> Search>(&self, f: F) ->
-        Result<Response<Vec<Anime>>> {
+    async fn search_anime<F>(&self, f: F) -> Result<Response<Vec<Anime>>>
+        where F: FnOnce(Search) -> Search + Send {
         let params = f(Search::default()).0;
         let uri = Url::parse(&format!("{}/anime?{}", API_URL, params))?;
 
-        handle_request::<Response<Vec<Anime>>>(&mut self.get(uri))
+        handle_request::<Response<Vec<Anime>>>(self.get(uri)).await
     }
 
-    fn search_manga<F: FnOnce(Search) -> Search>(&self, f: F) ->
-        Result<Response<Vec<Manga>>> {
-        let params = f(Search::default()).0;
+    async fn search_manga<F>(&self, f: F) -> Result<Response<Vec<Manga>>>
+        where F: FnOnce(Search) -> Search + Send {
+        let search = Search::default();
+        let params = f(search).0;
         let uri = Url::parse(&format!("{}/manga?{}", API_URL, params))?;
-
-        handle_request::<Response<Vec<Manga>>>(&mut self.get(uri))
+        println!("Reqwesting uri: {}", uri);
+        handle_request::<Response<Vec<Manga>>>(self.get(uri)).await
     }
 
-    fn search_users<F: FnOnce(Search) -> Search>(&self, f: F) ->
-        Result<Response<Vec<User>>> {
-        let params = f(Search::default()).0;
+    async fn search_users<F>(&self, f: F) -> Result<Response<Vec<User>>>
+        where F: FnOnce(Search) -> Search + Send {
+        let params = &f(Search::default()).0;
         let uri = Url::parse(&format!("{}/users?{}", API_URL, params))?;
-
-        handle_request::<Response<Vec<User>>>(&mut self.get(uri))
+        println!("Reqwesting uri: {}", uri);
+        handle_request::<Response<Vec<User>>>(self.get(uri)).await
     }
 }
 
-fn handle_request<T: DeserializeOwned>(request: &mut RequestBuilder) -> Result<T> {
-    let response = request.send()?;
+async fn handle_request<T: DeserializeOwned>(request: RequestBuilder) -> Result<T> {
+    let response = request.send().await?;
 
     match response.status() {
-        StatusCode::Ok => {},
-        StatusCode::BadRequest => {
+        StatusCode::OK => {},
+        StatusCode::BAD_REQUEST => {
             return Err(Error::ReqwestBad(Box::new(response)));
         },
-        StatusCode::Unauthorized => {
+        StatusCode::UNAUTHORIZED => {
             return Err(Error::ReqwestUnauthorized(Box::new(response)));
         },
         _ => return Err(Error::ReqwestInvalid(Box::new(response))),
     }
 
-    from_reader(response)
-}
-
-#[inline]
-fn from_reader<T: DeserializeOwned, U: Read>(reader: U) -> Result<T> {
-    serde_json::from_reader(reader).map_err(From::from)
+    response.json::<T>().await.map_err(From::from)
 }

@@ -17,13 +17,13 @@
 //!
 //! ```toml
 //! [dependencies]
-//! kitsu_io = "0.2"
+//! kitsu_async = "0.2"
 //! ```
 //!
 //! To enable both `hyper` and `reqwest` support:
 //!
 //! ```toml
-//! [dependencies.kitsu_io]
+//! [dependencies.kitsu_async]
 //! version = "0.2"
 //! features = ["hyper-support", "reqwest-support"]
 //! ```
@@ -31,7 +31,7 @@
 //! To enable `hyper` but not `reqwest` support:
 //!
 //! ```toml
-//! [dependencies.kitsu_io]
+//! [dependencies.kitsu_async]
 //! version = "0.2"
 //! default-features = false
 //! features = ["hyper-support"]
@@ -42,7 +42,7 @@
 //! Using reqwest, search for an anime using a string taken from user input:
 //!
 //! ```rust,no_run
-//! extern crate kitsu_io;
+//! extern crate kitsu_async;
 //! # #[cfg(feature = "reqwest")]
 //! extern crate reqwest;
 //!
@@ -50,7 +50,7 @@
 //! # #[cfg(feature = "reqwest")]
 //! # fn main() {
 //! #
-//! use kitsu_io::KitsuReqwestRequester;
+//! use kitsu_async::KitsuReqwestRequester;
 //! use reqwest::Client;
 //! use std::io::{self, Write};
 //!

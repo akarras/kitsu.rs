@@ -3,14 +3,14 @@
 extern crate futures;
 extern crate hyper;
 extern crate hyper_tls;
-extern crate kitsu_io;
+extern crate kitsu_async;
 extern crate tokio_core;
 
 use futures::Future;
 use futures::stream::Stream;
 use hyper::Client;
 use hyper_tls::HttpsConnector;
-use kitsu_io::KitsuHyperRequester;
+use kitsu_async::KitsuHyperRequester;
 use std::io::{self, Write};
 use tokio_core::reactor::Core;
 
