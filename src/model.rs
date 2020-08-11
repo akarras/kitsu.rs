@@ -1,8 +1,8 @@
 //! Models in struct form, parsed out from JSON in response bodies.
 
+use crate::Result;
 use serde_json;
 use std::collections::HashMap;
-use crate::Result;
 
 /// Information about an anime.
 #[derive(Clone, Debug, Deserialize)]
@@ -14,7 +14,7 @@ pub struct Anime {
     /// The type of item this is. Should always be [`Type::Anime`].
     ///
     /// [`Type::Anime`]: enum.Type.html#variant.Anime
-    #[serde(rename="type")]
+    #[serde(rename = "type")]
     pub kind: Type,
     /// Links related to the anime.
     pub links: HashMap<String, String>,
@@ -46,7 +46,7 @@ impl Anime {
 ///
 /// [`Anime`]: struct.Anime.html
 #[derive(Clone, Debug, Deserialize)]
-#[serde(rename_all= "camelCase")]
+#[serde(rename_all = "camelCase")]
 pub struct AnimeAttributes {
     /// Shortened nicknames for the [anime][`Anime`].
     ///
@@ -124,7 +124,7 @@ pub struct AnimeAttributes {
     ///
     /// [`AnimeType::Special`]: enum.AnimeType.html#variant.Special
     /// [`AnimeType::TV`]: enum.AnimeType.html#variant.TV
-    #[serde(rename="showType")]
+    #[serde(rename = "showType")]
     pub kind: AnimeType,
     /// Whether the anime is Not Safe For Work.
     pub nsfw: bool,
@@ -213,7 +213,7 @@ pub struct Links {
     /// Link to a related media item.
     pub related: String,
     /// Direct link to the media item.
-    #[serde(rename="self")]
+    #[serde(rename = "self")]
     pub own: String,
 }
 
@@ -242,7 +242,7 @@ pub struct AnimeRelationships {
     /// The anime's reviews.
     pub reviews: Relationship,
     /// The anime's streaming links.
-    #[serde(rename="streamingLinks")]
+    #[serde(rename = "streamingLinks")]
     pub streaming_links: Relationship,
 }
 
@@ -265,7 +265,10 @@ impl CoverImage {
     ///
     /// [`original`]: #structfield.original
     pub fn largest<'a>(&'a self) -> Option<&'a String> {
-        self.original.as_ref().or(self.large.as_ref()).or(self.small.as_ref())
+        self.original
+            .as_ref()
+            .or(self.large.as_ref())
+            .or(self.small.as_ref())
     }
 }
 
@@ -292,7 +295,8 @@ impl Image {
     ///
     /// [`original`]: #structfield.original
     pub fn largest<'a>(&'a self) -> Option<&'a String> {
-        self.original.as_ref()
+        self.original
+            .as_ref()
             .or(self.large.as_ref())
             .or(self.medium.as_ref())
             .or(self.small.as_ref())
@@ -310,7 +314,7 @@ pub struct Manga {
     /// The type of item this is. Should always be [`Type::Manga`].
     ///
     /// [`Type::Manga`]: enum.Type.html#variant.Manga
-    #[serde(rename="type")]
+    #[serde(rename = "type")]
     pub kind: Type,
     /// Links related to the manga.
     pub links: HashMap<String, String>,
@@ -340,7 +344,7 @@ impl Manga {
 ///
 /// [`Manga`]: struct.Manga.html
 #[derive(Clone, Debug, Deserialize)]
-#[serde(rename_all="camelCase")]
+#[serde(rename_all = "camelCase")]
 pub struct MangaAttributes {
     /// Shortened nicknames for the manga.
     pub abbreviated_titles: Option<Vec<String>>,
@@ -383,7 +387,7 @@ pub struct MangaAttributes {
     /// [`MangaType::Novel`]
     ///
     /// [`MangaType::Novel`]: enum.MangaType.html#variant.Novel
-    #[serde(rename="subtype")]
+    #[serde(rename = "subtype")]
     pub kind: MangaType,
     /// The rank based on the popularityof the manga.
     ///
@@ -460,37 +464,37 @@ impl MangaAttributes {
 #[derive(Clone, Copy, Debug, Deserialize)]
 pub struct RatingFrequencies {
     /// Number of 0 stars given.
-    #[serde(default, rename="0.0")]
+    #[serde(default, rename = "0.0")]
     pub rating_0_0: i64,
     /// Number of 0.5 stars given.
-    #[serde(default, rename="0.5")]
+    #[serde(default, rename = "0.5")]
     pub rating_0_5: i64,
     /// Number of 1.0 stars given.
-    #[serde(default, rename="1.0")]
+    #[serde(default, rename = "1.0")]
     pub rating_1_0: i64,
     /// Nubmer of 1.5 stars given.
-    #[serde(default, rename="1.5")]
+    #[serde(default, rename = "1.5")]
     pub rating_1_5: i64,
     /// Number of 2.0 stars given.
-    #[serde(default, rename="2.0")]
+    #[serde(default, rename = "2.0")]
     pub rating_2_0: i64,
     /// Number of 2.5 stars given.
-    #[serde(default, rename="2.5")]
+    #[serde(default, rename = "2.5")]
     pub rating_2_5: i64,
     /// Number of 3.0 stars given.
-    #[serde(default, rename="3.0")]
+    #[serde(default, rename = "3.0")]
     pub rating_3_0: i64,
     /// Number of 3.5 stars given.
-    #[serde(default, rename="3.5")]
+    #[serde(default, rename = "3.5")]
     pub rating_3_5: i64,
     /// Number of 4.0 stars given.
-    #[serde(default, rename="4.0")]
+    #[serde(default, rename = "4.0")]
     pub rating_4_0: i64,
     /// Number of 4.5 stars given.
-    #[serde(default, rename="4.5")]
+    #[serde(default, rename = "4.5")]
     pub rating_4_5: i64,
     /// Number of 5.0 stars given.
-    #[serde(default, rename="5.0")]
+    #[serde(default, rename = "5.0")]
     pub rating_5_0: i64,
 }
 
@@ -554,7 +558,7 @@ pub struct User {
     /// The type of item this is. Should always be [`Type::User`].
     ///
     /// [`Type::User`]: enum.Type.html#variant.User
-    #[serde(rename="type")]
+    #[serde(rename = "type")]
     pub kind: Type,
     /// Links related to the user.
     pub links: HashMap<String, String>,
@@ -566,7 +570,7 @@ pub struct User {
 ///
 /// [`User`]: struct.User.html
 #[derive(Clone, Debug, Deserialize)]
-#[serde(rename_all="camelCase")]
+#[serde(rename_all = "camelCase")]
 pub struct UserAttributes {
     /// The raw markdown for the user's long-form about text.
     ///
@@ -743,7 +747,7 @@ impl UserAttributes {
 ///
 /// [`User`]: struct.User.html
 #[derive(Clone, Debug, Deserialize)]
-#[serde(rename_all="camelCase")]
+#[serde(rename_all = "camelCase")]
 pub struct UserRelationships {
     /// Links to users the user blocks.
     pub blocks: Relationship,
@@ -779,22 +783,22 @@ pub enum AgeRating {
     /// Indicator that the anime is rated PG.
     PG,
     /// Indicator that the anime is rated PG-13.
-    #[serde(rename="PG-13")]
+    #[serde(rename = "PG-13")]
     PG13,
     /// Indicator that the anime is rated R.
     R,
     /// Indicator that the anime is rated R-17.
     R17,
     /// Indicator that the anime is rated R-17+.
-    #[serde(rename="R17+")]
+    #[serde(rename = "R17+")]
     R17Plus,
     /// Indicator that the anime is rated R18.
     R18,
     /// Indicator that the anime is rated R-18+.
-    #[serde(rename="R18+")]
+    #[serde(rename = "R18+")]
     R18Plus,
     /// Indicator that the anime is rated TV-Y7.
-    #[serde(rename="TV-Y7")]
+    #[serde(rename = "TV-Y7")]
     TvY7,
 }
 
@@ -823,7 +827,7 @@ impl AgeRating {
 ///
 /// [`Manga`]: struct.Manga.html
 #[derive(Clone, Copy, Debug, Deserialize, Eq, Ord, PartialEq, PartialOrd, Serialize)]
-#[serde(rename_all="lowercase")]
+#[serde(rename_all = "lowercase")]
 pub enum Status {
     /// Indicator that the series is current
     Current,
@@ -834,7 +838,7 @@ pub enum Status {
     /// Indicator that the series is unreleased
     Unreleased,
     /// Indicator that the series is upcoming
-    Upcoming
+    Upcoming,
 }
 
 /// The airing status of an [`Anime`].
@@ -906,7 +910,7 @@ impl AnimeType {
 ///
 /// [`Manga`]: struct.Manga.html
 #[derive(Clone, Copy, Debug, Deserialize, Eq, Ord, PartialEq, PartialOrd, Serialize)]
-#[serde(rename_all="lowercase")]
+#[serde(rename_all = "lowercase")]
 pub enum MangaType {
     /// Indicator that the manga is a doujin.
     Doujin,
@@ -922,7 +926,6 @@ pub enum MangaType {
     Oel,
     /// Indicator that the manga is a oneshot.
     Oneshot,
-
 }
 
 impl MangaType {
@@ -947,7 +950,7 @@ impl MangaType {
 
 /// The type of result from a search or retrieval.
 #[derive(Clone, Copy, Debug, Deserialize, Eq, Ord, PartialEq, PartialOrd, Serialize)]
-#[serde(rename_all="lowercase")]
+#[serde(rename_all = "lowercase")]
 pub enum Type {
     /// Indicator that the result is an [`Anime`].
     ///

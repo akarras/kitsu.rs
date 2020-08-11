@@ -4,16 +4,11 @@ use std::error::Error as StdError;
 use std::fmt::{Display, Formatter, Result as FmtResult};
 use std::result::Result as StdResult;
 
-
 #[cfg(feature = "hyper")]
 use hyper::error::UriError;
 #[cfg(feature = "reqwest")]
-use reqwest::{
-    Error as ReqwestError,
-    Response as ReqwestResponse,
-};
+use reqwest::{Error as ReqwestError, Response as ReqwestResponse};
 use url::ParseError as ReqwestUrlError;
-
 
 /// A result type to compose a successful value and the library's [`Error`]
 /// type.
@@ -100,7 +95,7 @@ impl StdError for Error {
             #[cfg(feature = "reqwest")]
             Error::ReqwestParse(ref inner) => inner.description(),
             #[cfg(feature = "reqwest")]
-            Error::ReqwestUnauthorized(_) => "Request auth bad"
+            Error::ReqwestUnauthorized(_) => "Request auth bad",
         }
     }
 }

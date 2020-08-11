@@ -6,15 +6,15 @@
 //!
 //! [`KitsuRequester`]: trait.KitsuRequester.html
 
-use std::io::Read;
+use crate::builder::Search;
+use crate::model::{Anime, Manga, Response, User};
+use crate::{Error, Result, API_URL};
+use async_trait::async_trait;
 pub use reqwest::Client as KitsuClient;
 use reqwest::{RequestBuilder, StatusCode, Url};
 use serde::de::DeserializeOwned;
 use serde_json;
-use crate::builder::Search;
-use crate::{API_URL, Error, Result};
-use crate::model::{Anime, Manga, Response, User};
-use async_trait::async_trait;
+use std::io::Read;
 
 /// Trait which defines the methods necessary to interact with the service.
 ///
@@ -242,7 +242,8 @@ pub trait KitsuRequester {
     /// [`Error::ReqwestParse`]: ../enum.Error.html#variant.ReqwestParse
     /// [`Error::ReqwestUnauthorized`]: ../enum.Error.html#variant.ReqwestUnauthorized
     async fn search_anime<F>(&self, f: F) -> Result<Response<Vec<Anime>>>
-        where F: FnOnce(Search) -> Search + Send;
+    where
+        F: FnOnce(Search) -> Search + Send;
 
     /// Gets an anime using its id.
     ///
@@ -297,7 +298,8 @@ pub trait KitsuRequester {
     /// [`Error::ReqwestParse`]: ../enum.Error.html#variant.ReqwestParse
     /// [`Error::ReqwestUnauthorized`]: ../enum.Error.html#variant.ReqwestUnauthorized
     async fn search_manga<F: FnOnce(Search) -> Search>(&self, f: F) -> Result<Response<Vec<Manga>>>
-        where F: FnOnce(Search) -> Search + Send;
+    where
+        F: FnOnce(Search) -> Search + Send;
 
     /// Gets an anime using its id.
     ///
@@ -352,8 +354,8 @@ pub trait KitsuRequester {
     /// [`Error::ReqwestParse`]: ../enum.Error.html#variant.ReqwestParse
     /// [`Error::ReqwestUnauthorized`]: ../enum.Error.html#variant.ReqwestUnauthorized
     async fn search_users<F>(&self, f: F) -> Result<Response<Vec<User>>>
-        where F: FnOnce(Search) -> Search + Send;
-
+    where
+        F: FnOnce(Search) -> Search + Send;
 }
 
 #[async_trait]
@@ -377,7 +379,9 @@ impl KitsuRequester for KitsuClient {
     }
 
     async fn search_anime<F>(&self, f: F) -> Result<Response<Vec<Anime>>>
-        where F: FnOnce(Search) -> Search + Send {
+    where
+        F: FnOnce(Search) -> Search + Send,
+    {
         let params = f(Search::default()).0;
         let uri = Url::parse(&format!("{}/anime?{}", API_URL, params))?;
 
@@ -385,7 +389,9 @@ impl KitsuRequester for KitsuClient {
     }
 
     async fn search_manga<F>(&self, f: F) -> Result<Response<Vec<Manga>>>
-        where F: FnOnce(Search) -> Search + Send {
+    where
+        F: FnOnce(Search) -> Search + Send,
+    {
         let search = Search::default();
         let params = f(search).0;
         let uri = Url::parse(&format!("{}/manga?{}", API_URL, params))?;
@@ -394,7 +400,9 @@ impl KitsuRequester for KitsuClient {
     }
 
     async fn search_users<F>(&self, f: F) -> Result<Response<Vec<User>>>
-        where F: FnOnce(Search) -> Search + Send {
+    where
+        F: FnOnce(Search) -> Search + Send,
+    {
         let params = &f(Search::default()).0;
         let uri = Url::parse(&format!("{}/users?{}", API_URL, params))?;
         println!("Reqwesting uri: {}", uri);
@@ -406,13 +414,13 @@ async fn handle_request<T: DeserializeOwned>(request: RequestBuilder) -> Result<
     let response = request.send().await?;
 
     match response.status() {
-        StatusCode::OK => {},
+        StatusCode::OK => {}
         StatusCode::BAD_REQUEST => {
             return Err(Error::ReqwestBad(Box::new(response)));
-        },
+        }
         StatusCode::UNAUTHORIZED => {
             return Err(Error::ReqwestUnauthorized(Box::new(response)));
-        },
+        }
         _ => return Err(Error::ReqwestInvalid(Box::new(response))),
     }
 
