@@ -24,6 +24,7 @@ async fn test_get_manga() {
     assert_eq!(res.data.id, "1");
 }
 
+#[ignore]
 #[tokio::test]
 async fn test_get_user() {
     let client = Client::new();
@@ -48,6 +49,7 @@ async fn test_search_manga() {
    assert!(res.data.len() > 0);
 }
 
+#[ignore]
 #[tokio::test]
 async fn test_search_users() {
     let client = Client::new();

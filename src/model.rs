@@ -383,7 +383,7 @@ pub struct MangaAttributes {
     /// [`MangaType::Novel`]
     ///
     /// [`MangaType::Novel`]: enum.MangaType.html#variant.Novel
-    #[serde(rename="mangaType")]
+    #[serde(rename="subtype")]
     pub kind: MangaType,
     /// The rank based on the popularityof the manga.
     ///
@@ -817,6 +817,24 @@ impl AgeRating {
 
         Ok(name)
     }
+}
+
+/// Status of the [`Manga`]
+///
+/// [`Manga`]: struct.Manga.html
+#[derive(Clone, Copy, Debug, Deserialize, Eq, Ord, PartialEq, PartialOrd, Serialize)]
+#[serde(rename_all="lowercase")]
+pub enum Status {
+    /// Indicator that the series is current
+    Current,
+    /// Indicator that the series is finished
+    Finished,
+    /// Indicator that the series is to be announced
+    Tba,
+    /// Indicator that the series is unreleased
+    Unreleased,
+    /// Indicator that the series is upcoming
+    Upcoming
 }
 
 /// The airing status of an [`Anime`].

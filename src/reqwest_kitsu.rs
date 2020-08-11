@@ -24,7 +24,7 @@ use async_trait::async_trait;
 /// trait:
 ///
 /// ```rust,no_run
-/// use kitsu_async::KitsuReqwestRequester;
+/// use kitsu_async::reqwest_kitsu::KitsuRequester;
 /// ```
 ///
 /// At this point, the methods will be on your Reqwest Client.
@@ -40,7 +40,7 @@ pub trait KitsuRequester {
     /// extern crate kitsu_async;
     /// extern crate reqwest;
     ///
-    /// use kitsu_async::KitsuReqwestRequester;
+    /// use kitsu_async::reqwest_kitsu::KitsuRequester;
     /// use reqwest::Client;
     ///
     /// #[tokio::main]
@@ -93,7 +93,7 @@ pub trait KitsuRequester {
     /// extern crate kitsu_async;
     /// extern crate reqwest;
     ///
-    /// use kitsu_async::KitsuReqwestRequester;
+    /// use kitsu_async::reqwest_kitsu::KitsuRequester;
     /// use reqwest::Client;
     ///
     /// #[tokio::main]
@@ -146,7 +146,7 @@ pub trait KitsuRequester {
     /// extern crate kitsu_async;
     /// extern crate reqwest;
     ///
-    /// use kitsu_async::KitsuReqwestRequester;
+    /// use kitsu_async::reqwest_kitsu::KitsuRequester;
     /// use reqwest::Client;
     ///
     /// #[tokio::main]
@@ -199,10 +199,11 @@ pub trait KitsuRequester {
     /// extern crate kitsu_async;
     /// extern crate reqwest;
     ///
-    /// use kitsu_async::KitsuReqwestRequester;
+    /// use kitsu_async::reqwest_kitsu::KitsuRequester;
     /// use reqwest::Client;
     ///
-    /// fn main() {
+    /// #[tokio::main]
+    /// async fn main() {
     ///     // Create the reqwest Client.
     ///     let client = Client::new();
     ///
@@ -253,10 +254,11 @@ pub trait KitsuRequester {
     /// extern crate kitsu_async;
     /// extern crate reqwest;
     ///
-    /// use kitsu_async::KitsuReqwestRequester;
+    /// use kitsu_async::reqwest_kitsu::KitsuRequester;
     /// use reqwest::Client;
     ///
-    /// fn main() {
+    /// #[tokio::main]
+    /// async fn main() {
     ///     // Create the reqwest Client.
     ///     let client = Client::new();
     ///
@@ -307,10 +309,11 @@ pub trait KitsuRequester {
     /// extern crate kitsu_async;
     /// extern crate reqwest;
     ///
-    /// use kitsu_async::KitsuReqwestRequester;
+    /// use kitsu_async::reqwest_kitsu::KitsuRequester;
     /// use reqwest::Client;
     ///
-    /// fn main() {
+    /// #[tokio::main]
+    /// async fn main() {
     ///     // Create the reqwest Client.
     ///     let client = Client::new();
     ///

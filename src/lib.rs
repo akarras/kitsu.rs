@@ -48,9 +48,10 @@
 //!
 //!
 //! # #[cfg(feature = "reqwest")]
-//! # fn main() {
+//! # #[tokio::main]
+//! # async fn main() {
 //! #
-//! use kitsu_async::KitsuReqwestRequester;
+//! use kitsu_async::reqwest_kitsu::KitsuRequester;
 //! use reqwest::Client;
 //! use std::io::{self, Write};
 //!
@@ -66,6 +67,7 @@
 //!
 //! // Search for the anime.
 //! let anime = client.search_anime(|f| f.filter("text", input_trimmed))
+//!     .await
 //!     .expect("Error searching for anime");
 //!
 //! // Print out the response of the request.
