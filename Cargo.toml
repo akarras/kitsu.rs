@@ -6,7 +6,7 @@ edition = "2018"
 
 [dependencies]
 async-trait = "~0.1"
-url = "~2.1"
+url = "~2.2"
 
 [dependencies.serde]
 optional = true
