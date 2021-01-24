@@ -1,5 +1,5 @@
 [package]
-name = "02_hyper"
+name = "hyper-example"
 version = "0.1.0"
 authors = ["my name <my@email.address>"]
 

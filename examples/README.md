@@ -11,7 +11,7 @@ approriate example relevant to your HTTP client requirements, like so:
 
 ```sh
 $ git clone https://github.com/zeyla/kitsu.rs
-$ cd kitsu.rs/examples/01_reqwest
+$ cd kitsu.rs/examples/reqwest
 ```
 
 Then run the project, this will compile the project as well as download and
