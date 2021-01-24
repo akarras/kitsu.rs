@@ -13,6 +13,7 @@ use async_trait::async_trait;
 pub use reqwest::Client as KitsuClient;
 use reqwest::{RequestBuilder, StatusCode, Url};
 use serde::de::DeserializeOwned;
+use log::info;
 
 /// Trait which defines the methods necessary to interact with the service.
 ///
@@ -393,7 +394,7 @@ impl KitsuRequester for KitsuClient {
         let search = Search::default();
         let params = f(search).0;
         let uri = Url::parse(&format!("{}/manga?{}", API_URL, params))?;
-        println!("Reqwesting uri: {}", uri);
+        info!("Reqwesting uri: {}", uri);
         handle_request::<Response<Vec<Manga>>>(self.get(uri)).await
     }
 
@@ -403,7 +404,7 @@ impl KitsuRequester for KitsuClient {
     {
         let params = &f(Search::default()).0;
         let uri = Url::parse(&format!("{}/users?{}", API_URL, params))?;
-        println!("Reqwesting uri: {}", uri);
+        info!("Reqwesting uri: {}", uri);
         handle_request::<Response<Vec<User>>>(self.get(uri)).await
     }
 }
