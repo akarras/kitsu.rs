@@ -1,7 +1,7 @@
 [package]
 authors = ["Mei Boudreau <xanizl@me.com>", "Zeyla Hellyer <zey@zey.moe>", "Aaron Karras <chew@lonely.games>"]
 name = "kitsu-async"
-version = "0.3.0"
+version = "0.4"
 edition = "2018"
 
 [dependencies]
@@ -30,7 +30,7 @@ version = "~0.1"
 
 [dependencies.reqwest]
 optional = true
-version = "~0.10"
+version = "~0.11"
 features = ["json"]
 
 [dev-dependencies]
